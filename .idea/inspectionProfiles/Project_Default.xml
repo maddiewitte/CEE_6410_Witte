@@ -1,0 +1,57 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="absl-py" />
+          <option value="astor" />
+          <option value="astroid" />
+          <option value="autopep8" />
+          <option value="Click" />
+          <option value="cvxpy" />
+          <option value="dill" />
+          <option value="ecos" />
+          <option value="fancyimpute" />
+          <option value="fastcache" />
+          <option value="Flask" />
+          <option value="future" />
+          <option value="gast" />
+          <option value="grpcio" />
+          <option value="gunicorn" />
+          <option value="h5py" />
+          <option value="pyyaml" />
+          <option value="isort" />
+          <option value="itsdangerous" />
+          <option value="Jinja2" />
+          <option value="joblib" />
+          <option value="Keras" />
+          <option value="Keras-Applications" />
+          <option value="Keras-Preprocessing" />
+          <option value="knnimpute" />
+          <option value="lazy-object-proxy" />
+          <option value="Markdown" />
+          <option value="MarkupSafe" />
+          <option value="mccabe" />
+          <option value="multiprocess" />
+          <option value="np-utils" />
+          <option value="osqp" />
+          <option value="protobuf" />
+          <option value="pycodestyle" />
+          <option value="pydot" />
+          <option value="pylint" />
+          <option value="python-dotenv" />
+          <option value="scikit-learn" />
+          <option value="scs" />
+          <option value="simplejson" />
+          <option value="sklearn" />
+          <option value="tensorboard" />
+          <option value="tensorflow" />
+          <option value="termcolor" />
+          <option value="Werkzeug" />
+          <option value="wrapt" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
