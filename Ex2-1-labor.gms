@@ -1,54 +1,54 @@
 $ontext
-CEE 6410 - Water Resources Systems Analysis
+CEE 6410 - Engineering Systems Analysis
 Example 2.1 from Bishop Et Al Text (https://digitalcommons.usu.edu/ecstatic_all/76/)
 Modifies Example to add a labor constraint
 
 THE PROBLEM:
 
-An irrigated farm can be planted in two crops:  eggplants and tomatoes.  Data are as fol-lows:
+A cr manufacturer makes coups and vans. The data are as follows:
 
-Seasonal Resource
-Inputs or Profit        Crops        Resource
+Yearly Resource
+Inputs or Profit        Car Make        Resource
 Availability
-        Eggplant        Tomatoes
-Water        1x103 gal/plant        2x103 gal/plant      4x106 gal/year
-Land        4 ft2/plant        3 ft2/plant               1.2x104 ft2
-Labor         5hr/plant        2.5/hr plant              17,500 hours
-Profit/plant        $6        $7
+                     Coups               Minivans
+Metal                1,000 lbs/car       2,000 lbs/car      4,000,000 lbs/year
+Circuit Boards       4 boards/car        3 boards/car       12,000 boards/year
+Labor                5 days/car          2.5 days/car       17,500 days/year
+Profit/car          $6,000 /car         $7,000 /car
 
-                Determine the optimal planting for the two crops.
+                Determine the optimal manufacturing plan.
 
 THE SOLUTION:
 Uses General Algebraic Modeling System to Solve this Linear Program
 
-David E Rosenberg
-david.rosenberg@usu.edu
-September 15, 2015
+Maddie Witte
+maddie.witte@usu.edu
+September 21, 2026
 $offtext
 
 * 1. DEFINE the SETS
-SETS plnt crops growing /Eggplant, Tomatoes/
-     res resources /Water, Land, Labor/;
+SETS car cars making /Coup, Minivan/
+     res resources /Metal, Circuit_Boards, Labor/;
 
 * 2. DEFINE input data
 PARAMETERS
-   c(plnt) Objective function coefficients ($ per plant)
-         /Eggplant 6,
-        Tomatoes 7 /
+   c(car) Objective function coefficients ($ per car)
+         /Coup 6000,
+        Minivan 7000 /
 
    b(res) Right hand constraint values (per resource)
-          /Water 4000000,
-           Land  12000,
+          /Metal 4000000,
+           Circuit_Boards  12000,
            Labor  17500/;
 
-TABLE A(plnt,res) Left hand side constraint coefficients
-                 Water    Land   Labor
- Eggplant        1000      4       5
- Tomatoes        2000      3       2.5;
+TABLE A(car,res) Left hand side constraint coefficients
+                 Metal     Circuit_Boards   Labor
+ Coup            1000      4                5
+ Minivan         2000      3                2.5;
 
 
 * 3. DEFINE the variables
-VARIABLES X(plnt) plants planted (Number)
+VARIABLES X(car) cars produced (Number)
           VPROFIT  total profit ($);
 
 * Non-negativity constraints
@@ -59,20 +59,20 @@ EQUATIONS
    PROFIT Total profit ($) and objective function value
    RES_CONSTRAIN(res) Resource Constraints;
 
-PROFIT..                 VPROFIT =E= SUM(plnt, c(plnt)*X(plnt));
-RES_CONSTRAIN(res) ..    SUM(plnt, A(plnt,res)*X(plnt)) =L= b(res);
+PROFIT..                 VPROFIT =E= SUM(car, c(car)*X(car));
+RES_CONSTRAIN(res) ..    SUM(car, A(car,res)*X(car)) =L= b(res);
 
 
 * 5. DEFINE the MODEL from the EQUATIONS
-MODEL PLANTING /PROFIT, RES_CONSTRAIN/;
+MODEL MAKING /PROFIT, RES_CONSTRAIN/;
 *Altnerative way to write (include all previously defined equations)
-*MODEL PLANTING /ALL/;
+*MODEL MAKING /ALL/;
 
 
 * 6. SOLVE the MODEL
-* Solve the PLANTING model using a Linear Programming Solver (see File=>Options=>Solvers)
+* Solve the MAKING model using a Linear Programming Solver (see File=>Options=>Solvers)
 *     to maximize VPROFIT
-SOLVE PLANTING USING LP MAXIMIZING VPROFIT;
+SOLVE MAKING USING LP MAXIMIZING VPROFIT;
 
 
 * 6. CLick File menu => RUN (F9) or Solve icon and examine solution report in .LST file

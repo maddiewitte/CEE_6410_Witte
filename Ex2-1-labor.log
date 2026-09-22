@@ -1,0 +1,70 @@
+--- Job Ex2-1-labor.gms Start 09/21/26 21:16:32 54.4.0 9a60ae27 WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\Ex2-1-labor.gms"
+    PageSize 0
+    ScrDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\225a\"
+    SysDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\"
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: GAMS Demo, for EULA and demo limitations see   G260530+0003Cc-GEN
+          https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+          C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gamslice.txt
+          ac4c742e-6023-4f8e
+          v:2                                                              
+          Demo license for demonstration and instructional purposes only
+System information: 16 physical cores and 32 Gb physical memory detected
+GAMS 54.4.0   Copyright (C) 1987-2026 GAMS Development. All rights reserved
+--- Starting compilation
+--- Ex2-1-labor.gms(78) 3 Mb
+--- Starting execution: elapsed 0:00:00.048
+--- Generating LP model MAKING
+--- Ex2-1-labor.gms(75) 4 Mb
+---   4 rows  3 columns  9 non-zeroes
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.200E+04, 4.000E+06] - Zero values observed as well
+--- Bound     [min, max] : [        NA,        NA] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.000E+00, 7.000E+03]
+--- Executing CPLEX (Solvelink=2): elapsed 0:00:00.181
+
+IBM ILOG CPLEX   54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+
+*** This solver runs with a demo license. No commercial use.
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+Version identifier: 22.1.2.0 | 2024-11-25 | 0edbb82fd
+CPXPARAM_Advance                                 0
+CPXPARAM_Simplex_Display                         2
+CPXPARAM_MIP_Display                             4
+CPXPARAM_MIP_Pool_Capacity                       0
+CPXPARAM_Preprocessing_QCPDuals                  0
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 3 rows, 2 columns, and 6 nonzeros.
+Presolve time = 0.00 sec. (0.00 ticks)
+
+Iteration      Dual Objective            In Variable           Out Variable
+     1 sI            0.000000             X(Minivan)RES_CONSTRAIN(Lab slack
+     2        22333333.333333                X(Coup)RES_CONSTRAIN(Met slack
+     3        20000000.000000RES_CONSTRAIN(Lab slackRES_CONSTRAIN(Cir slack
+
+--- LP status (1): optimal.
+--- Cplex Time: 0.00sec (det. 0.01 ticks)
+
+
+Optimal solution found
+Objective:     20000000.000000
+
+--- Reading solution for model MAKING
+*** Status: Normal completion
+--- Job Ex2-1-labor.gms Stop 09/21/26 21:16:34 elapsed 0:00:01.762

@@ -1,0 +1,14 @@
+B 3 C o m p i l a t i o n
+B 87 Equation Listing    SOLVE MAKING Using LP From line 75
+D 90 PROFIT
+D 95 RES_CONSTRAIN
+B 105 Column Listing      SOLVE MAKING Using LP From line 75
+E 108 X
+E 125 VPROFIT
+B 133 Range Statistics    SOLVE MAKING Using LP From line 75
+B 144 Model Statistics    SOLVE MAKING Using LP From line 75
+B 157 Solution Report     SOLVE MAKING Using LP From line 75
+F 190 PROFIT
+F 194 RES_CONSTRAIN
+G 202 X
+G 211 VPROFIT
