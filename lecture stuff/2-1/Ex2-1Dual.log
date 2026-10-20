@@ -1,0 +1,129 @@
+--- Job Ex2-1Dual.gms Start 10/01/26 15:20:07 54.4.0 9a60ae27 WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Ex2-1Dual.gms"
+    PageSize 0
+    ScrDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\225a\"
+    SysDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\"
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: GAMS Demo, for EULA and demo limitations see   G260530+0003Cc-GEN
+          https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+          C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gamslice.txt
+          ac4c742e-6023-4f8e
+          v:2                                                              
+          Demo license for demonstration and instructional purposes only
+System information: 16 physical cores and 32 Gb physical memory detected
+GAMS 54.4.0   Copyright (C) 1987-2026 GAMS Development. All rights reserved
+--- Starting compilation
+--- Ex2-1Dual.gms(99) 3 Mb
+--- Starting execution: elapsed 0:00:00.025
+--- Ex2-1Dual.gms(77) 4 Mb
+--- Generating LP model PLANT_PRIMAL
+--- Ex2-1Dual.gms(85) 4 Mb
+---   4 rows  3 columns  9 non-zeroes
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.200E+04, 4.000E+06] - Zero values observed as well
+--- Bound     [min, max] : [ 5.000E+00, 5.000E+00]
+--- Matrix    [min, max] : [ 1.000E+00, 2.000E+03]
+--- Executing CPLEX (Solvelink=2): elapsed 0:00:00.079
+
+IBM ILOG CPLEX   54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+
+*** This solver runs with a demo license. No commercial use.
+
+--- Reading option file 'C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\cplex.opt' failed: Cannot open file.
+
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+Version identifier: 22.1.2.0 | 2024-11-25 | 0edbb82fd
+CPXPARAM_Advance                                 0
+CPXPARAM_Simplex_Display                         2
+CPXPARAM_MIP_Display                             4
+CPXPARAM_MIP_Pool_Capacity                       0
+CPXPARAM_Preprocessing_QCPDuals                  0
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 3 rows, 2 columns, and 6 nonzeros.
+Presolve time = 0.00 sec. (0.00 ticks)
+
+Iteration      Dual Objective            In Variable           Out Variable
+     1 sI            0.000000            X(Tomatoes)RES_CONS_PRIMAL(L slack
+     2           22333.333333            X(Eggplant)RES_CONS_PRIMAL(W slack
+     3           20000.000000RES_CONS_PRIMAL(L slackRES_CONS_PRIMAL(L slack
+
+--- LP status (1): optimal.
+--- Cplex Time: 0.00sec (det. 0.01 ticks)
+
+
+Optimal solution found
+Objective:        20000.000000
+
+--- Reading solution for model PLANT_PRIMAL
+--- Executing after solve: elapsed 0:00:01.028
+--- Generating LP model PLANT_DUAL
+--- Ex2-1Dual.gms(89) 4 Mb
+---   3 rows  4 columns  10 non-zeroes
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 6.000E+00, 7.000E+00] - Zero values observed as well
+--- Bound     [min, max] : [        NA,        NA] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.000E+00, 4.000E+06]
+--- Executing CPLEX (Solvelink=2): elapsed 0:00:01.034
+
+IBM ILOG CPLEX   54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+
+*** This solver runs with a demo license. No commercial use.
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+Version identifier: 22.1.2.0 | 2024-11-25 | 0edbb82fd
+CPXPARAM_Advance                                 0
+CPXPARAM_Simplex_Display                         2
+CPXPARAM_MIP_Display                             4
+CPXPARAM_MIP_Pool_Capacity                       0
+CPXPARAM_Preprocessing_QCPDuals                  0
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 2 rows, 3 columns, and 6 nonzeros.
+Presolve time = 0.00 sec. (0.00 ticks)
+
+Iteration      Dual Objective            In Variable           Out Variable
+     1           18000.000000                Y(Land)RES_CONS_DUAL(Egg slack
+     2           20000.000000               Y(Water)RES_CONS_DUAL(Tom slack
+
+--- LP status (1): optimal.
+--- Cplex Time: 0.00sec (det. 0.01 ticks)
+
+
+Optimal solution found
+Objective:        20000.000000
+
+--- Reading solution for model PLANT_DUAL
+--- Executing after solve: elapsed 0:00:01.878
+--- Ex2-1Dual.gms(95) 4 Mb
+--- GDX File (execute_unload) C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Ex2-1Dual.gdx
+--- Ex2-1Dual.gms(97) 4 Mb
+GDX2XLS          54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+Output file: C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Ex2-1Dual.xlsx
+*** Status: Normal completion
+--- Job Ex2-1Dual.gms Stop 10/01/26 15:20:16 elapsed 0:00:08.998
+Cannot delete directory: 225a
+Cannot delete directory: 225a
+Cannot delete directory: 225a
+Cannot delete directory: 225a
+Cannot delete directory: 225a
+*** Error: Cannot delete process directory: 225a

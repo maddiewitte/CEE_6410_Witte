@@ -1,0 +1,131 @@
+
+--- Job Ex6-3-integer.gms Start 10/09/26 20:44:10 54.4.0 9a60ae27 WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Ex6-3-integer.gms"
+    PageSize 0
+    ScrDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\225d\"
+    SysDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\"
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: Course License                                 G260818+0003Ac-GEN
+          Utah State University                                     DCE5615
+          225d\gamslice.dat
+          1d9a2824-f32d-4897
+          node:88986405 mem:32 cores:16 ipport:58436 v:2                   
+          Course license for use within the course and related course work
+          The time-limited license stops working on : Jun 14, 2027
+System information: 16 physical cores and 32 Gb physical memory detected
+GAMS 54.4.0   Copyright (C) 1987-2026 GAMS Development. All rights reserved
+--- Starting compilation
+--- Ex6-3-integer.gms(80) 3 Mb
+--- Starting execution: elapsed 0:00:00.052
+--- Generating MIP model WatSupplyRelaxed
+--- Ex6-3-integer.gms(73) 4 Mb
+---   10 rows  5 columns  18 non-zeroes
+---   2 discrete-columns
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.000E+00, 2.000E+03] - Zero values observed as well
+--- Bound     [min, max] : [ 1.000E+00, 1.000E+00] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.000E+00, 9.000E+04]
+--- Executing CPLEX (Solvelink=2): elapsed 0:00:00.125
+
+IBM ILOG CPLEX   54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+
+*** This solver runs with a community license.
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+Version identifier: 22.1.2.0 | 2024-11-25 | 0edbb82fd
+CPXPARAM_Advance                                 0
+CPXPARAM_Simplex_Display                         2
+CPXPARAM_MIP_Display                             4
+CPXPARAM_MIP_Pool_Capacity                       0
+CPXPARAM_Preprocessing_QCPDuals                  0
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+Generic callback                                 0x50
+Found incumbent of value 330000.000000 after 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 5 rows and 1 columns.
+Reduced MIP has 4 rows, 4 columns, and 8 nonzeros.
+Reduced MIP has 2 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.01 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 2 times.
+MIP Presolve modified 1 coefficients.
+Aggregator did 1 substitutions.
+Reduced MIP has 3 rows, 3 columns, and 6 nonzeros.
+Reduced MIP has 2 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.01 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 3 rows, 3 columns, and 6 nonzeros.
+Reduced MIP has 2 binaries, 1 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.00 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Clique table members: 1.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 22 threads.
+Parallel mode: deterministic, using up to 3 threads for parallel tasks at root LP.
+Tried aggregator 1 time.
+LP Presolve eliminated 2 rows and 2 columns.
+Aggregator did 1 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.00 ticks)
+Initializing dual steep norms . . .
+Root relaxation solution time = 0.00 sec. (0.00 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                       330000.0000   240000.0000            27.27%
+Found incumbent of value 330000.000000 after 0.00 sec. (0.03 ticks)
+      0     0        cutoff         330000.0000                      0    0.00%
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.03 ticks)
+Parallel b&c, 22 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.03 ticks)
+
+--- MIP status (101): integer optimal solution.
+--- Cplex Time: 0.03sec (det. 0.03 ticks)
+
+
+Proven optimal solution
+MIP Solution:       330000.000000    (0 iterations, 0 nodes)
+
+Best possible:      330000.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+
+--- Reading solution for model WatSupplyRelaxed
+--- Solver did not provide marginals for model WatSupplyRelaxed
+--- To request marginals from the solver set option requestMarginals >= 1
+--- Executing after solve: elapsed 0:00:01.762
+--- Ex6-3-integer.gms(78) 4 Mb
+--- GDX File (execute_unload) C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Ex6-3-integer.gdx
+--- Ex6-3-integer.gms(80) 4 Mb
+GDX2XLS          54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+Output file: C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Ex6-3-integer.xlsx
+(Created backup file)
+*** Status: Normal completion
+--- Job Ex6-3-integer.gms Stop 10/09/26 20:44:20 elapsed 0:00:10.179
+Cannot delete directory: 225d
+Cannot delete directory: 225d
+Cannot delete directory: 225d
+Cannot delete directory: 225d
+Cannot delete directory: 225d
+*** Error: Cannot delete process directory: 225d

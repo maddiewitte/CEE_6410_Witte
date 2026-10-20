@@ -1,0 +1,34 @@
+
+--- Job FPrimal.gms Start 10/02/26 13:15:08 54.4.0 9a60ae27 WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\FPrimal.gms"
+    PageSize 0
+    ScrDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\225a\"
+    SysDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\"
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: Course License                                 G260818+0003Ac-GEN
+          Utah State University                                     DCE5615
+          225a\gamslice.dat
+          1d9a2824-f32d-4897
+          node:88986405 mem:32 cores:16 ipport:54917 v:2                   
+          Course license for use within the course and related course work
+          The time-limited license stops working on : Jun 14, 2027
+System information: 16 physical cores and 32 Gb physical memory detected
+GAMS 54.4.0   Copyright (C) 1987-2026 GAMS Development. All rights reserved
+--- Starting compilation
+--- FPrimal.gms(66) 3 Mb 1 Error
+*** Error 149 in C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\FPrimal.gms
+    Uncontrolled set entered as constant
+--- FPrimal.gms(77) 3 Mb 2 Errors
+*** Error 257 in C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\FPrimal.gms
+    Solve statement not checked because of previous errors
+--- FPrimal.gms(80) 3 Mb 2 Errors
+*** Status: Compilation error(s)
+--- Job FPrimal.gms Stop 10/02/26 13:15:08 elapsed 0:00:00.058

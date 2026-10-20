@@ -1,0 +1,80 @@
+--- Job Ex8-4-1.gms Start 10/13/26 14:43:01 54.4.0 9a60ae27 WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Ex8-4-1.gms"
+    PageSize 0
+    ScrDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\225f\"
+    SysDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\"
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: Course License                                 G260818+0003Ac-GEN
+          Utah State University                                     DCE5615
+          225f\gamslice.dat
+          1d9a2824-f32d-4897
+          node:88986405 mem:32 cores:16 ipport:62197 v:2                   
+          Course license for use within the course and related course work
+          The time-limited license stops working on : Jun 14, 2027
+System information: 16 physical cores and 32 Gb physical memory detected
+GAMS 54.4.0   Copyright (C) 1987-2026 GAMS Development. All rights reserved
+--- Starting compilation
+--- Ex8-4-1.gms(79) 3 Mb
+--- Starting execution: elapsed 0:00:00.047
+--- Ex8-4-1.gms(74) 4 Mb
+--- Generating NLP model NonLinModel
+--- Ex8-4-1.gms(77) 6 Mb
+---   4 rows  3 columns  8 non-zeroes
+---   21 nl-code  3 nl-non-zeroes
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 5.000E+00, 2.600E+01] - Zero values observed as well
+--- Bound     [min, max] : [ 3.000E+00, 3.000E+00] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.000E+00, 1.400E+01] - Zero values observed as well
+--- Ex8-4-1.gms(77) 4 Mb
+--- Executing CONOPT (Solvelink=2): elapsed 0:00:00.079
+
+CONOPT 4         54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+
+ 
+ 
+    C O N O P T   version 4.39.2
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+    Will use up to 4 threads.
+ 
+ 
+    The user model has 4 constraints and 3 variables
+    with 8 Jacobian elements, 3 of which are nonlinear.
+    The Hessian of the Lagrangian has 2 elements on the diagonal,
+    0 elements below the diagonal, and 2 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          0.0000000000E+00 (Input point)
+ 
+    The pre-triangular part of the model has 2 constraints and 0 variables.
+    The post-triangular part of the model has 1 constraints and variables.
+ 
+    Preprocessed model has 1 constraints and 2 variables
+    with 1 Jacobian elements, 1 of which are nonlinear.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      0.0000000000E+00 (Full preprocessed model)
+                      0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =    0.00000000000
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   3          1.0214073798E+01 1.4E+01       2 6.4E-01     1 F  T
+       6   4          1.2469981496E+01 8.8E-11       2
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+--- Reading solution for model NonLinModel
+--- Executing after solve: elapsed 0:00:01.991
+--- Ex8-4-1.gms(79) 4 Mb
+*** Status: Normal completion
+--- Job Ex8-4-1.gms Stop 10/13/26 14:43:03 elapsed 0:00:01.995

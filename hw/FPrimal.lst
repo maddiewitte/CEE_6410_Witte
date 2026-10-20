@@ -1,0 +1,105 @@
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/02/26 13:15:08 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+      CEE 6410 - Engineering Systems Analysis
+      Example 2.1 from Bishop Et Al Text (https://digitalcommons.usu.edu/ecstatic_all/76/)
+      Modifies Example to add a labor constraint
+       
+      THE PROBLEM:
+       
+      A cr manufacturer makes coups and vans. The data are as follows:
+       
+      Yearly Resource
+      Inputs or Profit      Months
+      Availability
+                           June             July           August            Return ($/acre)
+      Hay                  2                1              1                 100
+      Grain                1                2              0                 120
+       
+       
+                      Determine the optimal water allocation plan.
+       
+      THE SOLUTION:
+      Uses General Algebraic Modeling System to Solve this Linear Program
+       
+      Maddie Witte
+      maddie.witte@usu.edu
+      October 2, 2026
+       
+       
+  29   
+  30  * 1. DEFINE the SETS
+  31  SETS crop /Hay, Grain/
+  32       month /June, July, August/;
+  33   
+  34  * 2. DEFINE input data
+  35  PARAMETERS
+  36     c(crop) Objective function coefficients ($ per acre crop)
+  37           /Hay 100,
+  38          Grain 120 /
+  39   
+  40     b(month) Right hand constraint values (available water per month)
+  41            /June 14000,
+  42             July  18000,
+  43             August  6000/;
+  44   
+  45  TABLE A(crop,month) Left hand side constraint coefficients: water per crop per month
+  46                   June      July      August
+  47   Hay             2         1         1
+  48   Grain           1         2         0;
+  49   
+  50   
+  51  * 3. DEFINE the variables
+  52  VARIABLES X(crop) area planted (acres)
+  53            VPROFIT  total profit ($);
+  54   
+  55  * Non-negativity constraints
+  56  POSITIVE VARIABLES X;
+  57   
+  58  * 4. COMBINE variables and data in equations
+  59  EQUATIONS
+  60     PROFIT Total profit ($) and objective function value
+  61     RES_CONSTRAIN(month) Resource Constraints
+  62     MAX_AREA total amount of area the crops can fill;
+  63   
+  64  PROFIT..                   VPROFIT =E= SUM(crop, c(crop)*X(crop));
+  65  RES_CONSTRAIN(month) ..    SUM(crop, A(crop,month)*X(crop)) =L= b(month);
+  66  MAX_AREA..                 X(crop) =L= 10000;
+****                                   $149
+**** 149  Uncontrolled set entered as constant
+  67   
+  68  * 5. DEFINE the MODEL from the EQUATIONS
+  69  MODEL PLANTING /PROFIT, RES_CONSTRAIN, MAX_AREA/;
+  70  *Altnerative way to write (include all previously defined equations)
+  71  *MODEL MAKING /ALL/;
+  72   
+  73   
+  74  * 6. SOLVE the MODEL
+  75  * Solve the MAKING model using a Linear Programming Solver (see File=>Options=>Solvers)
+  76  *     to maximize VPROFIT
+  77  SOLVE PLANTING USING LP MAXIMIZING VPROFIT;
+****                                            $257
+**** 257  Solve statement not checked because of previous errors
+  78   
+  79   
+  80  * 6. CLick File menu => RUN (F9) or Solve icon and examine solution report in .LST file
+
+**** 2 ERROR(S)   0 WARNING(S)
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  54.4.0 9a60ae27 WEX-WEI
+
+
+USER: Course License                                 G260818+0003Ac-GEN
+      Utah State University                                     DCE5615
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\FPrimal.gms
+Output     C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\FPrimal.lst
+
+**** USER ERROR(S) ENCOUNTERED

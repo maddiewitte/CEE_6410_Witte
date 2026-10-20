@@ -1,0 +1,79 @@
+
+--- Job ExChevyFunction.gms Start 10/15/26 15:44:47 54.4.0 9a60ae27 WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\ExChevyFunction.gms"
+    PageSize 0
+    ScrDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\225f\"
+    SysDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\"
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: Course License                                 G260818+0003Ac-GEN
+          Utah State University                                     DCE5615
+          225f\gamslice.dat
+          1d9a2824-f32d-4897
+          node:88986405 mem:32 cores:16 ipport:55325 v:2                   
+          Course license for use within the course and related course work
+          The time-limited license stops working on : Jun 14, 2027
+System information: 16 physical cores and 32 Gb physical memory detected
+GAMS 54.4.0   Copyright (C) 1987-2026 GAMS Development. All rights reserved
+--- Starting compilation
+--- ExChevyFunction.gms(62) 3 Mb
+--- Starting execution: elapsed 0:00:00.038
+--- ExChevyFunction.gms(57) 4 Mb
+--- Generating NLP model ChevyModel
+--- ExChevyFunction.gms(60) 6 Mb
+---   1 rows  3 columns  3 non-zeroes
+---   48 nl-code  2 nl-non-zeroes
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [        NA,        NA] - Zero values observed as well
+--- Bound     [min, max] : [ 3.000E+00, 3.000E+00]
+--- Matrix    [min, max] : [ 1.795E-02, 1.000E+00]
+--- ExChevyFunction.gms(60) 4 Mb
+--- Executing CONOPT (Solvelink=2): elapsed 0:00:00.070
+
+CONOPT 4         54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+
+ 
+ 
+    C O N O P T   version 4.39.2
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+    Will use up to 4 threads.
+ 
+ 
+    The user model has 1 constraints and 3 variables
+    with 3 Jacobian elements, 2 of which are nonlinear.
+    The Hessian of the Lagrangian has 2 elements on the diagonal,
+    1 elements below the diagonal, and 2 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.7151854107E-02 (Input point)
+ 
+    The post-triangular part of the model has 1 constraints and variables.
+ 
+    Preprocessed model has no constraints and 2 variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      0.0000000000E+00 (Full preprocessed model)
+                      0.0000000000E+00 (After scaling)
+ 
+ ** Feasible solution. Value of objective =  -1.715185410694E-02
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+       1   4         -5.4670311865E-03 8.2E-02       2 1.0E+00     1 F  T
+       6   4         -8.7236046524E-05 0.0E+00       0
+ 
+ ** Optimal solution. There are no superbasic variables.
+ 
+--- Reading solution for model ChevyModel
+--- Executing after solve: elapsed 0:00:01.682
+--- ExChevyFunction.gms(62) 4 Mb
+*** Status: Normal completion
+--- Job ExChevyFunction.gms Stop 10/15/26 15:44:49 elapsed 0:00:01.692

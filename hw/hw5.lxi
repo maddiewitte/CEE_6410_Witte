@@ -1,0 +1,45 @@
+B 3 C o m p i l a t i o n
+B 107 Equation Listing    SOLVE HW5Reservoir Using MIP From line 90
+D 110 ObjectiveFunct
+D 115 WaterDemand
+D 122 SourceUse
+D 133 PumpCapacity
+D 140 PumpWaterAvailability
+D 147 StorageS1
+D 152 StorageS2
+D 157 DamCapacity
+D 164 SpillLimit
+D 171 HighorLowDam
+B 177 Column Listing      SOLVE HW5Reservoir Using MIP From line 90
+E 180 X
+E 202 A
+E 211 S
+E 227 Spill
+E 242 TCOST
+E 249 I
+B 279 Range Statistics    SOLVE HW5Reservoir Using MIP From line 90
+B 290 Model Statistics    SOLVE HW5Reservoir Using MIP From line 90
+B 303 Solution Report     SOLVE HW5Reservoir Using MIP From line 90
+F 340 ObjectiveFunct
+F 344 WaterDemand
+F 351 SourceUse
+F 362 PumpCapacity
+F 369 PumpWaterAvailability
+F 378 StorageS1
+F 379 StorageS2
+F 384 DamCapacity
+F 391 SpillLimit
+F 400 HighorLowDam
+G 404 X
+G 415 A
+G 421 S
+G 428 Spill
+G 437 TCOST
+G 441 I
+B 455 E x e c u t i o n
+I 455 X
+I 464 I
+I 469 A
+I 474 S
+I 479 Spill
+I 485 TCOST

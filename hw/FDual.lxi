@@ -1,0 +1,32 @@
+B 3 C o m p i l a t i o n
+B 107 Equation Listing    SOLVE CROP_PRIMAL Using LP From line 84
+D 110 PROFIT_PRIMAL
+D 115 RES_CONS_PRIMAL
+D 124 CROP_AREA
+B 130 Column Listing      SOLVE CROP_PRIMAL Using LP From line 84
+E 133 X
+E 151 VPROFIT
+B 159 Range Statistics    SOLVE CROP_PRIMAL Using LP From line 84
+B 170 Model Statistics    SOLVE CROP_PRIMAL Using LP From line 84
+B 183 Solution Report     SOLVE CROP_PRIMAL Using LP From line 84
+F 219 PROFIT_PRIMAL
+F 223 RES_CONS_PRIMAL
+F 233 CROP_AREA
+G 237 X
+G 246 VPROFIT
+B 256 Equation Listing    SOLVE CROP_DUAL Using LP From line 88
+D 259 REDCOST_DUAL
+D 264 RES_CONS_DUAL
+B 272 Column Listing      SOLVE CROP_DUAL Using LP From line 88
+E 275 Y
+E 295 VREDCOST
+E 302 Z
+B 312 Range Statistics    SOLVE CROP_DUAL Using LP From line 88
+B 323 Model Statistics    SOLVE CROP_DUAL Using LP From line 88
+B 336 Solution Report     SOLVE CROP_DUAL Using LP From line 88
+F 369 REDCOST_DUAL
+F 373 RES_CONS_DUAL
+G 380 Y
+G 390 VREDCOST
+G 391 Z
+B 402 E x e c u t i o n

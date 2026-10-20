@@ -1,0 +1,145 @@
+
+--- Job hw5.gms Start 10/20/26 14:38:21 54.4.0 9a60ae27 WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\hw5.gms"
+    PageSize 0
+    ScrDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\225e\"
+    SysDir "C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\54\"
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: Course License                                 G260818+0003Ac-GEN
+          Utah State University                                     DCE5615
+          225e\gamslice.dat
+          1d9a2824-f32d-4897
+          node:88986405 mem:32 cores:16 ipport:56958 v:2                   
+          Course license for use within the course and related course work
+          The time-limited license stops working on : Jun 14, 2027
+System information: 16 physical cores and 32 Gb physical memory detected
+GAMS 54.4.0   Copyright (C) 1987-2026 GAMS Development. All rights reserved
+--- Starting compilation
+--- hw5.gms(98) 3 Mb
+--- Starting execution: elapsed 0:00:00.033
+--- Generating MIP model HW5Reservoir
+--- hw5.gms(90) 4 Mb
+---   20 rows  15 columns  56 non-zeroes
+---   3 discrete-columns
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.000E+00, 6.000E+02] - Zero values observed as well
+--- Bound     [min, max] : [ 1.000E+00, 1.000E+00] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.000E+00, 1.000E+04]
+--- Executing CPLEX (Solvelink=2): elapsed 0:00:00.086
+
+IBM ILOG CPLEX   54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+
+*** This solver runs with a community license.
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+Version identifier: 22.1.2.0 | 2024-11-25 | 0edbb82fd
+CPXPARAM_Advance                                 0
+CPXPARAM_Simplex_Display                         2
+CPXPARAM_MIP_Display                             4
+CPXPARAM_MIP_Pool_Capacity                       0
+CPXPARAM_Preprocessing_QCPDuals                  0
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+Generic callback                                 0x50
+Found incumbent of value 0.000000 after 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 3 rows and 1 columns.
+MIP Presolve modified 4 coefficients.
+Reduced MIP has 16 rows, 14 columns, and 43 nonzeros.
+Reduced MIP has 3 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.03 ticks)
+Probing fixed 0 vars, tightened 2 bounds.
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 16 rows, 14 columns, and 43 nonzeros.
+Reduced MIP has 3 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.02 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Clique table members: 1.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 22 threads.
+Parallel mode: deterministic, using up to 3 threads for parallel tasks at root LP.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.01 ticks)
+Initializing dual steep norms . . .
+
+Iteration      Dual Objective            In Variable           Out Variable
+     1          108120.000000   X(riverpump,season2)WaterDemand(seaso slack
+     2          104120.000000      X(lowdam,season2)         Spill(season2)
+     3          104120.000000             S(season1)     X(highdam,season1)
+     4           96776.666667      X(lowdam,season1)WaterDemand(seaso slack
+     5           96776.666667     X(highdam,season2)      X(lowdam,season2)
+     6           96776.666667   X(riverpump,season1)PumpWaterAvailabi slack
+     7           96776.666667      X(lowdam,season2)     X(highdam,season2)
+     8           96776.666667             I(highdam)SourceUse(highdam slack
+     9           90540.952381     X(highdam,season2)      X(lowdam,season2)
+    10           86255.238095              I(lowdam)SourceUse(lowdam, slack
+    11           86046.666667      X(lowdam,season2)     X(highdam,season2)
+    12           78773.939394           I(riverpump)PumpCapacity(seas slack
+    13           78046.666667         Spill(season2)     HighorLowDam slack
+    14           78046.666667     X(highdam,season1)SourceUse(lowdam, slack
+Root relaxation solution time = 0.08 sec. (0.03 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                            0.0000   110150.0000              --- 
+Found incumbent of value 0.000000 after 0.08 sec. (0.11 ticks)
+*     0+    0                        50000.0000   110150.0000           120.30%
+Found incumbent of value 50000.000000 after 0.08 sec. (0.11 ticks)
+*     0     0      integral     0    78046.6667    78046.6667       14    0.00%
+Elapsed time = 0.08 sec. (0.11 ticks, tree = 0.00 MB)
+Found incumbent of value 78046.666667 after 0.08 sec. (0.11 ticks)
+
+Root node processing (before b&c):
+  Real time             =    0.08 sec. (0.11 ticks)
+Parallel b&c, 22 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.08 sec. (0.11 ticks)
+
+--- MIP status (101): integer optimal solution.
+--- Cplex Time: 0.09sec (det. 0.11 ticks)
+
+
+Proven optimal solution
+MIP Solution:        78046.666667    (14 iterations, 0 nodes)
+
+Best possible:       78046.666667
+Absolute gap:            0.000000
+Relative gap:            0.000000
+
+--- Reading solution for model HW5Reservoir
+--- Solver did not provide marginals for model HW5Reservoir
+--- To request marginals from the solver set option requestMarginals >= 1
+--- Executing after solve: elapsed 0:00:01.007
+--- hw5.gms(96) 4 Mb
+--- GDX File (execute_unload) C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\HW5Reservoir.gdx
+--- hw5.gms(98) 4 Mb
+GDX2XLS          54.4.0 9a60ae27 Sep 9, 2026           WEI x86 64bit/MS Window
+Output file: C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\HW5Reservoir.xlsx
+(Created backup file)
+*** Status: Normal completion
+--- Job hw5.gms Stop 10/20/26 14:38:27 elapsed 0:00:05.924
+Cannot delete directory: 225e
+Cannot delete directory: 225e
+Cannot delete directory: 225e
+Cannot delete directory: 225e
+Cannot delete directory: 225e
+*** Error: Cannot delete process directory: 225e

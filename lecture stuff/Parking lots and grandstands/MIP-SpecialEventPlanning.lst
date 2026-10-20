@@ -1,0 +1,391 @@
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/15/26 13:59:35 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+      Special-Event Park-and-Ride Planning Problem
+      CEE 6410/5410
+      David Rosenberg
+      October 10, 2026
+       
+      This problem was contributed by Dr. Ran Sun and expanded by Dr. David Rosenberg
+       
+      Learning objectives.
+      Students will be able to:
+      •   Define dimensions, decision variables and an objective function;
+      •   Formulate demand, capacity, and service-quality constraints;
+      •   Solve a small linear program;
+      •   Identify constraints;
+       
+      Problem Statement
+      State Department of Transportation guidance for special events emphasizes advance parklotanning for transportation demand, traffic, parking, transit operations, and seating.
+       
+      Passengers must also be assigned in full bus-loads of 50 passengers per bus.
+       
+      Additionally, the event parklotanners must rent and bring in grandstands for the attendees. They have 2 potential venders. Each vender has an up-front reservation cost, number of seats per grandstand, and cost to load, ship, and setup a grandstand.
+       
+      Vendor  Reservation cost ($)    Seats per grandstand    Cost to load, ship, and setup ($ per grandstand)
+      PurpleRain $1,000                   100                 200
+      Blue Sky    $1,500                  200                 300
+       
+      Full details at https://usu.instructure.com/courses/818402/files/100525844?wrap=1
+       
+      David E Rosenberg
+      david.rosenberg@usu.edu
+  32   
+  33  * 1. DEFINE the SETS
+  34  SETS parklot Parking Lots /north, south, west/
+  35       vendor Vendors of grandstands /PurpleRain, BlueSky/;
+  36   
+  37  * 2. DEFINE input data
+  38  PARAMETERS
+  39     MaxPassengers(parklot) maximimum number of peoparklote parking lot can handle (Number)
+  40           /north 600,
+  41            south 500,
+  42            west  600/
+  43     Cost(parklot) cost per passenger from parking lot ($ per person)
+  44            /north 4,
+  45            south 5,
+  46            west  7/
+  47     TravelTime(parklot) Travel time from parking lot (minutes)
+  48           /north 20,
+  49            south 12,
+  50            west  8/
+  51     MaxAverageTime Maximum average travel time for all pasengers (minutes) /13/
+  52     Attendees number of attendees /1200/
+  53     ReservationCost(vendor) Cost to reserve grandstands from vendor ($)
+  54          /PurpleRain 1000,
+  55           BlueSky    1500/
+  56     Seats(vendor) Seats per grandstand (number)
+  57          /PurpleRain 100,
+  58           BlueSky    200/
+  59     UnitCost(vendor) Cost per grandstand to load ship and setup ($ per grandstand)
+  60          /PurpleRain 200,
+  61           BlueSky    300/
+  62     MaxGrandstands(vendor) max grandstands needed
+  63           /PurpleRain 12, BlueSky 6/;
+  64   
+  65  * 3. DEFINE the variables
+  66  VARIABLES   I(vendor) binary decision to use or not use each vendor (1=yes 0=no)
+  67              G(vendor) number of granstands ordered
+  68              X(parklot) number of buses from parking lots
+  69              TCOST  total capital and operating costs ($);
+  70   
+  71  BINARY VARIABLES I;
+  72  INTEGER VARIABLES X,G;
+  73   
+  74  * 4. COMBINE variables and data in equations
+  75  *EQUATIONS
+  76  EQUATIONS
+  77      ObjectiveFunct  total cost of everything
+  78      MaxCap(parklot) max capacity in each lot
+  79      TotalDemandCap meet total attendee capacity
+  80      GrandSeatsCap meet capacity for grandstand seats
+  81      AvgTravel average travel time from lots
+  82      VendorMax(vendor) relationship between grandstands and vendor
+  83      VendorMin(vendor) min requirment for grandstands if vendor is selected;
+  84   
+  85  ObjectiveFunct..   TCOST =E= SUM(parklot, Cost(parklot) * 50 * X(parklot)) + SUM(vendor, ReservationCost(vendor) * I(vendor)) + SUM(vendor, UnitCost(vendor) * G(vendor));
+  86  MaxCap(parklot)..  50 * X(parklot) =L= MaxPassengers(parklot);
+  87  TotalDemandCap..   SUM(parklot, 50 * X(parklot)) =G= Attendees;
+  88  GrandSeatsCap..    SUM(vendor, Seats(vendor) * G(vendor)) =G= Attendees;
+  89  AvgTravel..        SUM(parklot, (TravelTime(parklot) - MaxAverageTime) * X(parklot)) =L= 0;
+  90  VendorMax(vendor).. G(vendor) =L= MaxGrandstands(vendor) * I(vendor);
+  91  VendorMin(vendor).. G(vendor) =G= I(vendor);
+  92   
+  93  * 5. DEFINE the MODEL from the EQUATIONS
+  94  MODEL SpecialEvent /ALL/;
+  95   
+  96  * 6. Solve the Model as a Mixed Integer Program
+  97  SOLVE SpecialEvent USING MIP MINIMIZING TCOST;
+  98   
+  99  * 7. Display the decision variable values in the list file
+ 100  DISPLAY X.L, I.L, G.L, TCOST.L;
+ 101   
+ 102  * Dump all input data and results to a GAMS gdx file
+ 103  Execute_Unload "MIP-SpecialEvent.gdx";
+ 104  * Dump the gdx file to an Excel workbook
+ 105  Execute "gdx2xls MIP-SpecialEvent.gdx"
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  54.4.0 9a60ae27 WEX-WEI
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/15/26 13:59:35 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE SpecialEvent Using MIP From line 97
+
+
+---- ObjectiveFunct  =E=  total cost of everything
+
+ObjectiveFunct..  - 1000*I(PurpleRain) - 1500*I(BlueSky) - 200*G(PurpleRain) - 300*G(BlueSky) - 200*X(north) - 250*X(south) - 350*X(west) + TCOST =E= 0 ; (LHS = 0)
+     
+
+---- MaxCap  =L=  max capacity in each lot
+
+MaxCap(north)..  50*X(north) =L= 600 ; (LHS = 0)
+     
+MaxCap(south)..  50*X(south) =L= 500 ; (LHS = 0)
+     
+MaxCap(west)..  50*X(west) =L= 600 ; (LHS = 0)
+     
+
+---- TotalDemandCap  =G=  meet total attendee capacity
+
+TotalDemandCap..  50*X(north) + 50*X(south) + 50*X(west) =G= 1200 ; (LHS = 0, INFES = 1200 ****)
+     
+
+---- GrandSeatsCap  =G=  meet capacity for grandstand seats
+
+GrandSeatsCap..  100*G(PurpleRain) + 200*G(BlueSky) =G= 1200 ; (LHS = 0, INFES = 1200 ****)
+     
+
+---- AvgTravel  =L=  average travel time from lots
+
+AvgTravel..  7*X(north) - X(south) - 5*X(west) =L= 0 ; (LHS = 0)
+     
+
+---- VendorMax  =L=  relationship between grandstands and vendor
+
+VendorMax(PurpleRain)..  - 12*I(PurpleRain) + G(PurpleRain) =L= 0 ; (LHS = 0)
+     
+VendorMax(BlueSky)..  - 6*I(BlueSky) + G(BlueSky) =L= 0 ; (LHS = 0)
+     
+
+---- VendorMin  =G=  min requirment for grandstands if vendor is selected
+
+VendorMin(PurpleRain)..  - I(PurpleRain) + G(PurpleRain) =G= 0 ; (LHS = 0)
+     
+VendorMin(BlueSky)..  - I(BlueSky) + G(BlueSky) =G= 0 ; (LHS = 0)
+     
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/15/26 13:59:35 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE SpecialEvent Using MIP From line 97
+
+
+---- I  binary decision to use or not use each vendor (1=yes 0=no)
+
+I(PurpleRain)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+    -1000       ObjectiveFunct
+      -12       VendorMax(PurpleRain)
+       -1       VendorMin(PurpleRain)
+
+I(BlueSky)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+    -1500       ObjectiveFunct
+       -6       VendorMax(BlueSky)
+       -1       VendorMin(BlueSky)
+
+
+---- G  number of granstands ordered
+
+G(PurpleRain)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+     -200       ObjectiveFunct
+      100       GrandSeatsCap
+        1       VendorMax(PurpleRain)
+        1       VendorMin(PurpleRain)
+
+G(BlueSky)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+     -300       ObjectiveFunct
+      200       GrandSeatsCap
+        1       VendorMax(BlueSky)
+        1       VendorMin(BlueSky)
+
+
+---- X  number of buses from parking lots
+
+X(north)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+     -200       ObjectiveFunct
+       50       MaxCap(north)
+       50       TotalDemandCap
+        7       AvgTravel
+
+X(south)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+     -250       ObjectiveFunct
+       50       MaxCap(south)
+       50       TotalDemandCap
+       -1       AvgTravel
+
+X(west)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+     -350       ObjectiveFunct
+       50       MaxCap(west)
+       50       TotalDemandCap
+       -5       AvgTravel
+
+
+---- TCOST  total capital and operating costs ($)
+
+TCOST
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       ObjectiveFunct
+
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/15/26 13:59:35 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Range Statistics    SOLVE SpecialEvent Using MIP From line 97
+
+
+RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
+
+RHS       [min, max] : [ 5.000E+02, 1.200E+03] - Zero values observed as well
+Bound     [min, max] : [ 1.000E+00, 1.000E+00] - Zero values observed as well
+Matrix    [min, max] : [ 1.000E+00, 1.500E+03]
+
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/15/26 13:59:35 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE SpecialEvent Using MIP From line 97
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           7     SINGLE EQUATIONS           11
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES            8
+NON ZERO ELEMENTS            27     DISCRETE VARIABLES          7
+
+
+GENERATION TIME      =        0.078 SECONDS      4 MB  54.4.0 9a60ae27 WEX-WEI
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/15/26 13:59:35 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE SpecialEvent Using MIP From line 97
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   SpecialEvent        OBJECTIVE  TCOST
+     TYPE    MIP                 DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  97
+
+**** SOLVER STATUS     1 Normal Completion
+**** MODEL STATUS      1 Optimal
+**** OBJECTIVE VALUE             9750.0000
+
+ RESOURCE USAGE, LIMIT          0.031 10000000000.000
+ ITERATION COUNT, LIMIT         0    2147483647
+*** This solver runs with a community license.
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+
+--- MIP status (101): integer optimal solution.
+--- Cplex Time: 0.03sec (det. 1.04 ticks)
+
+
+Proven optimal solution
+MIP Solution:         9750.000000    (0 iterations, 0 nodes)
+
+Best possible:        9750.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
+
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU Objective~          .              .              .          
+
+  ObjectiveFunct  total cost of everything
+
+---- EQU MaxCap  max capacity in each lot
+
+             LOWER          LEVEL          UPPER
+
+north        -INF          350.0000       600.0000      
+south        -INF          450.0000       500.0000      
+west         -INF          400.0000       600.0000      
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU TotalDema~      1200.0000      1200.0000        +INF         
+---- EQU GrandSeat~      1200.0000      1200.0000        +INF         
+---- EQU AvgTravel         -INF             .              .          
+
+  TotalDemandCap  meet total attendee capacity
+  GrandSeatsCap  meet capacity for grandstand seats
+  AvgTravel  average travel time from lots
+
+---- EQU VendorMax  relationship between grandstands and vendor
+
+                  LOWER          LEVEL          UPPER
+
+PurpleRain        -INF             .              .          
+BlueSky           -INF             .              .          
+
+---- EQU VendorMin  min requirment for grandstands if vendor is selected
+
+                  LOWER          LEVEL          UPPER
+
+PurpleRain          .              .            +INF         
+BlueSky             .             5.0000        +INF         
+
+---- VAR I  binary decision to use or not use each vendor (1=yes 0=no)
+
+                  LOWER          LEVEL          UPPER
+
+PurpleRain          .              .             1.0000      
+BlueSky             .             1.0000         1.0000      
+
+---- VAR G  number of granstands ordered
+
+                  LOWER          LEVEL          UPPER
+
+PurpleRain          .              .            +INF         
+BlueSky             .             6.0000        +INF         
+
+---- VAR X  number of buses from parking lots
+
+             LOWER          LEVEL          UPPER
+
+north          .             7.0000        +INF         
+south          .             9.0000        +INF         
+west           .             8.0000        +INF         
+
+                           LOWER          LEVEL          UPPER
+
+---- VAR TCOST             -INF         9750.0000        +INF         
+
+  TCOST  total capital and operating costs ($)
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/15/26 13:59:35 Page 7
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+----    100 VARIABLE X.L  number of buses from parking lots
+
+north 7.000,    south 9.000,    west  8.000
+
+
+----    100 VARIABLE I.L  binary decision to use or not use each vendor (1=yes 0=no)
+
+BlueSky 1.000
+
+
+----    100 VARIABLE G.L  number of granstands ordered
+
+BlueSky 6.000
+
+
+----    100 VARIABLE TCOST.L               =     9750.000  total capital and operating costs ($)
+
+
+EXECUTION TIME       =        9.266 SECONDS      4 MB  54.4.0 9a60ae27 WEX-WEI
+
+
+USER: Course License                                 G260818+0003Ac-GEN
+      Utah State University                                     DCE5615
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Parking lots and grandstands\MIP-SpecialEventPlanning.gms
+Output     C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\lecture stuff\Parking lots and grandstands\MIP-SpecialEventPlanning.lst

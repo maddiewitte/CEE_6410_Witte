@@ -1,0 +1,33 @@
+B 3 C o m p i l a t i o n
+B 114 Equation Listing    SOLVE SpecialEvent Using MIP From line 97
+D 117 ObjectiveFunct
+D 122 MaxCap
+D 131 TotalDemandCap
+D 136 GrandSeatsCap
+D 141 AvgTravel
+D 146 VendorMax
+D 153 VendorMin
+B 161 Column Listing      SOLVE SpecialEvent Using MIP From line 97
+E 164 I
+E 179 G
+E 196 X
+E 220 TCOST
+B 228 Range Statistics    SOLVE SpecialEvent Using MIP From line 97
+B 239 Model Statistics    SOLVE SpecialEvent Using MIP From line 97
+B 252 Solution Report     SOLVE SpecialEvent Using MIP From line 97
+F 289 ObjectiveFunct
+F 293 MaxCap
+F 303 TotalDemandCap
+F 304 GrandSeatsCap
+F 305 AvgTravel
+F 311 VendorMax
+F 318 VendorMin
+G 325 I
+G 332 G
+G 339 X
+G 349 TCOST
+B 359 E x e c u t i o n
+I 359 X
+I 365 I
+I 370 G
+I 376 TCOST

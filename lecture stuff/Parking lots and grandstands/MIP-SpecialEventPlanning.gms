@@ -18,7 +18,7 @@ State Department of Transportation guidance for special events emphasizes advanc
 
 Passengers must also be assigned in full bus-loads of 50 passengers per bus.
 
-Additionally, the event parklotanners must rent and bring in grandstands for the attendees. They have 2 potential venders. Each vender has an up-front reservation cost, number of seats per grandstand, and cost to load, ship, and setup a grandstand.
+Additionally, the event planners must rent and bring in grandstands for the attendees. They have 2 potential venders. Each vender has an up-front reservation cost, number of seats per grandstand, and cost to load, ship, and setup a grandstand.
 
 Vendor  Reservation cost ($)    Seats per grandstand    Cost to load, ship, and setup ($ per grandstand)
 PurpleRain $1,000                   100                 200

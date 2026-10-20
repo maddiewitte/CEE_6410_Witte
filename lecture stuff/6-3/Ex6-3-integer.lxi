@@ -1,0 +1,28 @@
+B 3 C o m p i l a t i o n
+B 89 Equation Listing    SOLVE WatSupplyRelaxed Using MIP From line 73
+D 92 COST
+D 97 MaxCap
+D 104 MinReqUse
+D 111 MeetDemand
+D 116 IntUpBound
+D 123 IntLowBound
+B 131 Column Listing      SOLVE WatSupplyRelaxed Using MIP From line 73
+E 134 I
+E 152 X
+E 169 TCOST
+B 177 Range Statistics    SOLVE WatSupplyRelaxed Using MIP From line 73
+B 188 Model Statistics    SOLVE WatSupplyRelaxed Using MIP From line 73
+B 201 Solution Report     SOLVE WatSupplyRelaxed Using MIP From line 73
+F 238 COST
+F 242 MaxCap
+F 249 MinReqUse
+F 258 MeetDemand
+F 262 IntUpBound
+F 269 IntLowBound
+G 276 I
+G 283 X
+G 292 TCOST
+B 302 E x e c u t i o n
+I 302 X
+I 308 I
+I 314 TCOST

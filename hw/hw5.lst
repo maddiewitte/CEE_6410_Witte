@@ -1,0 +1,500 @@
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/20/26 14:38:21 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+      Maddie Witte
+      USU CEE 6410
+      Homework 5
+      October 19, 2026
+       
+      Problem Statement
+       
+      Two water sources are being considered for a farm: a gravity diversion from reservoir (with 2 possible sizes) or
+      a pump from a lower river diversion. Base flow in the river adds 2 acft per day under the reservoir and above the
+      pumping site. The high dam has a capacity of 700 acft and the low dam's is 300 acft with costs of $10,000 per
+      year for the high dam and $6,000 per year for the low dam. The pump has a capacity of 2.2 acft per day and a yearly
+      cost of $8,000 and an operational cost of $20 per acft pumped to the farm.
+       
+      The return for the farmland is $300 per acre irrigated. The yearly water supply from the river and irrigation
+      demand are in the table below; the year is broken up into two 6 mo long seasons.
+       
+      Seasonal Flow and demand
+      season (t)      River Inflow (Q) (acft)      Irrigation Demand (acft/acre)
+      1               600                          1.0
+      2               200                          3.0
+       
+      Maximize profits from the system.
+       
+  26   
+  27  Sets
+  28      watersource /lowdam, highdam, riverpump/
+  29      season /season1, season2/
+  30      farmland /area/;
+  31   
+  32  Parameters
+  33      WaterSupply(season)         amount of water supplied to the reservoir via the river (acft)
+  34          /season1 600, season2 200/
+  35      IrrigationDemand(season)      the amount of water req by the farmland (acft per acre)
+  36          /season1 1.0, season2 3.0/
+  37      MaxCapacity(watersource)    yearly capactiy of each water source in acft (2.2 acft per day * 365 days per year = 803 acft)
+  38          /highdam 700, lowdam 300, riverpump 803/
+  39      InitialCost(watersource)    inital cost of each water collection method ($)
+  40          /highdam 10000, lowdam 6000, riverpump 8000/
+  41      OperatingCost(watersource)  cost to run the dam or pump per acft of water ($)
+  42          /highdam 0, lowdam 0, riverpump 20/
+  43      Return(farmland)            return per year per acre of farm ($)
+  44          /area 300/
+  45  ;
+  46   
+  47  Positive Variables
+  48      X(watersource, season)  amount of water pulled from said watersource (ac-ft continuous)
+  49      A(farmland)     total area of farmland to be irrigated (ac continous)
+  50      S(season)       storage in reservoir between season (acft)
+  51      Spill(season)   amount of water sent over the spllway (acft)
+  52  ;
+  53  Variables
+  54      TCOST           total operating costs ($ continuous)
+  55  ;
+  56   
+  57  Binary Variables
+  58      I(watersource)  whether or not to use the water source (binary)
+  59  ;
+  60   
+  61  Equations
+  62      ObjectiveFunct         sum of all operating costs and returns
+  63      WaterDemand(season)    how much water needed to irrigate
+  64      SourceUse(watersource, season) where the water is going from the reservoir
+  65      PumpCapacity(season)   max amount of water the pump can deliver
+  66      PumpWaterAvailability(season)   how much water the pump has available to pump
+  67      StorageS1              water balance for season 1
+  68      StorageS2              water balance for season 2
+  69      DamCapacity(season)    how much water each dam can store
+  70      SpillLimit(season)     how much water the dam needs to spill to the river
+  71      HighorLowDam           which dam (high or low) will be built
+  72  ;
+  73   
+  74  ObjectiveFunct.. TCOST =E= Sum(farmland, Return(farmland) * A(farmland)) -
+  75                         Sum(watersource, InitialCost(watersource) * I(watersource) + OperatingCost(watersource) *
+  76                         Sum(season, X(watersource, season)));
+  77  WaterDemand(season)..  Sum(watersource, X(watersource, season)) =G=Sum(farmland, IrrigationDemand(season) * A(farmland));
+  78  SourceUse(watersource, season).. X(watersource, season) =L= MaxCapacity(watersource) * I(watersource);
+  79  PumpCapacity(season).. X('riverpump', season) =L= 2.2 * 182.5 * I('riverpump');
+  80  PumpWaterAvailability(season).. X('riverpump', season) =L= 2 * 182.5 + Spill(season);
+  81  StorageS1..            S('season1') =E= WaterSupply('season1')- X('lowdam','season1')- X('highdam','season1')- Spill('season1');
+  82  StorageS2..            S('season2') =E=S('season1')+ WaterSupply('season2')- X('lowdam','season2')- X('highdam','season2')- Spill('season2');
+  83  DamCapacity(season)..  S(season) =L= MaxCapacity('lowdam') * I('lowdam') + MaxCapacity('highdam') * I('highdam');
+  84  SpillLimit(season)..   Spill(season) =L= WaterSupply(season) + S(season);
+  85  HighorLowDam..         I('lowdam') + I('highdam') =L= 1;
+  86   
+  87  Model HW5Reservoir /ALL/;
+  88   
+  89  * 6. Solve the Model as a Mixed Integer Program
+  90  Solve HW5Reservoir using MIP Maximizing TCOST;
+  91   
+  92  * 7. Display the decision variable values in the list file
+  93  Display X.L, I.L, A.L, S.L, Spill.L, TCOST.L;
+  94   
+  95  * send input data and results to a GAMS gdx file
+  96  Execute_Unload "HW5Reservoir.gdx";
+  97  * send the gdx file to excel
+  98  Execute "gdx2xls HW5Reservoir.gdx"
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  54.4.0 9a60ae27 WEX-WEI
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/20/26 14:38:21 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE HW5Reservoir Using MIP From line 90
+
+
+---- ObjectiveFunct  =E=  sum of all operating costs and returns
+
+ObjectiveFunct..  20*X(riverpump,season1) + 20*X(riverpump,season2) - 300*A(area) + TCOST + 6000*I(lowdam) + 10000*I(highdam) + 8000*I(riverpump) =E= 0 ; (LHS = 0)
+     
+
+---- WaterDemand  =G=  how much water needed to irrigate
+
+WaterDemand(season1)..  X(lowdam,season1) + X(highdam,season1) + X(riverpump,season1) - A(area) =G= 0 ; (LHS = 0)
+     
+WaterDemand(season2)..  X(lowdam,season2) + X(highdam,season2) + X(riverpump,season2) - 3*A(area) =G= 0 ; (LHS = 0)
+     
+
+---- SourceUse  =L=  where the water is going from the reservoir
+
+SourceUse(lowdam,season1)..  X(lowdam,season1) - 300*I(lowdam) =L= 0 ; (LHS = 0)
+     
+SourceUse(lowdam,season2)..  X(lowdam,season2) - 300*I(lowdam) =L= 0 ; (LHS = 0)
+     
+SourceUse(highdam,season1)..  X(highdam,season1) - 700*I(highdam) =L= 0 ; (LHS = 0)
+     
+REMAINING 3 ENTRIES SKIPPED
+
+
+---- PumpCapacity  =L=  max amount of water the pump can deliver
+
+PumpCapacity(season1)..  X(riverpump,season1) - 401.5*I(riverpump) =L= 0 ; (LHS = 0)
+     
+PumpCapacity(season2)..  X(riverpump,season2) - 401.5*I(riverpump) =L= 0 ; (LHS = 0)
+     
+
+---- PumpWaterAvailability  =L=  how much water the pump has available to pump
+
+PumpWaterAvailability(season1)..  X(riverpump,season1) - Spill(season1) =L= 365 ; (LHS = 0)
+     
+PumpWaterAvailability(season2)..  X(riverpump,season2) - Spill(season2) =L= 365 ; (LHS = 0)
+     
+
+---- StorageS1  =E=  water balance for season 1
+
+StorageS1..  X(lowdam,season1) + X(highdam,season1) + S(season1) + Spill(season1) =E= 600 ; (LHS = 0, INFES = 600 ****)
+     
+
+---- StorageS2  =E=  water balance for season 2
+
+StorageS2..  X(lowdam,season2) + X(highdam,season2) - S(season1) + S(season2) + Spill(season2) =E= 200 ; (LHS = 0, INFES = 200 ****)
+     
+
+---- DamCapacity  =L=  how much water each dam can store
+
+DamCapacity(season1)..  S(season1) - 300*I(lowdam) - 700*I(highdam) =L= 0 ; (LHS = 0)
+     
+DamCapacity(season2)..  S(season2) - 300*I(lowdam) - 700*I(highdam) =L= 0 ; (LHS = 0)
+     
+
+---- SpillLimit  =L=  how much water the dam needs to spill to the river
+
+SpillLimit(season1)..  - S(season1) + Spill(season1) =L= 600 ; (LHS = 0)
+     
+SpillLimit(season2)..  - S(season2) + Spill(season2) =L= 200 ; (LHS = 0)
+     
+
+---- HighorLowDam  =L=  which dam (high or low) will be built
+
+HighorLowDam..  I(lowdam) + I(highdam) =L= 1 ; (LHS = 0)
+     
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/20/26 14:38:21 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE HW5Reservoir Using MIP From line 90
+
+
+---- X  amount of water pulled from said watersource (ac-ft continuous)
+
+X(lowdam,season1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       WaterDemand(season1)
+        1       SourceUse(lowdam,season1)
+        1       StorageS1
+
+X(lowdam,season2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       WaterDemand(season2)
+        1       SourceUse(lowdam,season2)
+        1       StorageS2
+
+X(highdam,season1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       WaterDemand(season1)
+        1       SourceUse(highdam,season1)
+        1       StorageS1
+
+REMAINING 3 ENTRIES SKIPPED
+
+---- A  total area of farmland to be irrigated (ac continous)
+
+A(area)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+     -300       ObjectiveFunct
+       -1       WaterDemand(season1)
+       -3       WaterDemand(season2)
+
+
+---- S  storage in reservoir between season (acft)
+
+S(season1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       StorageS1
+       -1       StorageS2
+        1       DamCapacity(season1)
+       -1       SpillLimit(season1)
+
+S(season2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       StorageS2
+        1       DamCapacity(season2)
+       -1       SpillLimit(season2)
+
+
+---- Spill  amount of water sent over the spllway (acft)
+
+Spill(season1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       PumpWaterAvailability(season1)
+        1       StorageS1
+        1       SpillLimit(season1)
+
+Spill(season2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       PumpWaterAvailability(season2)
+        1       StorageS2
+        1       SpillLimit(season2)
+
+
+---- TCOST  total operating costs ($ continuous)
+
+TCOST
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       ObjectiveFunct
+
+
+---- I  whether or not to use the water source (binary)
+
+I(lowdam)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     6000       ObjectiveFunct
+     -300       SourceUse(lowdam,season1)
+     -300       SourceUse(lowdam,season2)
+     -300       DamCapacity(season1)
+     -300       DamCapacity(season2)
+        1       HighorLowDam
+
+I(highdam)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+    10000       ObjectiveFunct
+     -700       SourceUse(highdam,season1)
+     -700       SourceUse(highdam,season2)
+     -700       DamCapacity(season1)
+     -700       DamCapacity(season2)
+        1       HighorLowDam
+
+I(riverpump)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     8000       ObjectiveFunct
+     -803       SourceUse(riverpump,season1)
+     -803       SourceUse(riverpump,season2)
+     -401.5     PumpCapacity(season1)
+     -401.5     PumpCapacity(season2)
+
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/20/26 14:38:21 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Range Statistics    SOLVE HW5Reservoir Using MIP From line 90
+
+
+RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
+
+RHS       [min, max] : [ 1.000E+00, 6.000E+02] - Zero values observed as well
+Bound     [min, max] : [ 1.000E+00, 1.000E+00] - Zero values observed as well
+Matrix    [min, max] : [ 1.000E+00, 1.000E+04]
+
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/20/26 14:38:21 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE HW5Reservoir Using MIP From line 90
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          10     SINGLE EQUATIONS           20
+BLOCKS OF VARIABLES           6     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            56     DISCRETE VARIABLES          3
+
+
+GENERATION TIME      =        0.047 SECONDS      4 MB  54.4.0 9a60ae27 WEX-WEI
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/20/26 14:38:21 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE HW5Reservoir Using MIP From line 90
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   HW5Reservoir        OBJECTIVE  TCOST
+     TYPE    MIP                 DIRECTION  MAXIMIZE
+     SOLVER  CPLEX               FROM LINE  90
+
+**** SOLVER STATUS     1 Normal Completion
+**** MODEL STATUS      1 Optimal
+**** OBJECTIVE VALUE            78046.6667
+
+ RESOURCE USAGE, LIMIT          0.094 10000000000.000
+ ITERATION COUNT, LIMIT        14    2147483647
+*** This solver runs with a community license.
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+
+--- MIP status (101): integer optimal solution.
+--- Cplex Time: 0.09sec (det. 0.11 ticks)
+
+
+Proven optimal solution
+MIP Solution:        78046.666667    (14 iterations, 0 nodes)
+
+Best possible:       78046.666667
+Absolute gap:            0.000000
+Relative gap:            0.000000
+
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU Objective~          .       7.275958E-12          .          
+
+  ObjectiveFunct  sum of all operating costs and returns
+
+---- EQU WaterDemand  how much water needed to irrigate
+
+               LOWER          LEVEL          UPPER
+
+season1          .              .            +INF         
+season2          .              .            +INF         
+
+---- EQU SourceUse  where the water is going from the reservoir
+
+                         LOWER          LEVEL          UPPER
+
+lowdam   .season1        -INF             .              .          
+lowdam   .season2        -INF             .              .          
+highdam  .season1        -INF         -636.5000          .          
+highdam  .season2        -INF             .              .          
+riverpump.season1        -INF         -499.3333          .          
+riverpump.season2        -INF         -401.5000          .          
+
+---- EQU PumpCapacity  max amount of water the pump can deliver
+
+               LOWER          LEVEL          UPPER
+
+season1        -INF          -97.8333          .          
+season2        -INF      5.684342E-14          .          
+
+---- EQU PumpWaterAvailability  how much water the pump has available to pump
+
+               LOWER          LEVEL          UPPER
+
+season1        -INF          303.6667       365.0000      
+season2        -INF          365.0000       365.0000      
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU StorageS1        600.0000       600.0000       600.0000      
+---- EQU StorageS2        200.0000       200.0000       200.0000      
+
+  StorageS1  water balance for season 1
+  StorageS2  water balance for season 2
+
+---- EQU DamCapacity  how much water each dam can store
+
+               LOWER          LEVEL          UPPER
+
+season1        -INF         -163.5000          .          
+season2        -INF         -700.0000          .          
+
+---- EQU SpillLimit  how much water the dam needs to spill to the river
+
+               LOWER          LEVEL          UPPER
+
+season1        -INF         -536.5000       600.0000      
+season2        -INF           36.5000       200.0000      
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU HighorLow~        -INF            1.0000         1.0000      
+
+  HighorLowDam  which dam (high or low) will be built
+
+---- VAR X  amount of water pulled from said watersource (ac-ft continuous)
+
+                         LOWER          LEVEL          UPPER
+
+lowdam   .season1          .              .            +INF         
+lowdam   .season2          .              .            +INF         
+highdam  .season1          .            63.5000        +INF         
+highdam  .season2          .           700.0000        +INF         
+riverpump.season1          .           303.6667        +INF         
+riverpump.season2          .           401.5000        +INF         
+
+---- VAR A  total area of farmland to be irrigated (ac continous)
+
+            LOWER          LEVEL          UPPER
+
+area          .           367.1667        +INF         
+
+---- VAR S  storage in reservoir between season (acft)
+
+               LOWER          LEVEL          UPPER
+
+season1          .           536.5000        +INF         
+season2          .              .            +INF         
+
+---- VAR Spill  amount of water sent over the spllway (acft)
+
+               LOWER          LEVEL          UPPER
+
+season1          .              .            +INF         
+season2          .            36.5000        +INF         
+
+                           LOWER          LEVEL          UPPER
+
+---- VAR TCOST             -INF        78046.6667        +INF         
+
+  TCOST  total operating costs ($ continuous)
+
+---- VAR I  whether or not to use the water source (binary)
+
+                 LOWER          LEVEL          UPPER
+
+lowdam             .              .             1.0000      
+highdam            .             1.0000         1.0000      
+riverpump          .             1.0000         1.0000      
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 54.4.0  9a60ae27 Sep 9, 2026           WEX-WEI x86 64bit/MS Windows - 10/20/26 14:38:21 Page 7
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+----     93 VARIABLE X.L  amount of water pulled from said watersource (ac-ft continuous)
+
+              season1     season2
+
+highdam        63.500     700.000
+riverpump     303.667     401.500
+
+
+----     93 VARIABLE I.L  whether or not to use the water source (binary)
+
+highdam   1.000,    riverpump 1.000
+
+
+----     93 VARIABLE A.L  total area of farmland to be irrigated (ac continous)
+
+area 367.167
+
+
+----     93 VARIABLE S.L  storage in reservoir between season (acft)
+
+season1 536.500
+
+
+----     93 VARIABLE Spill.L  amount of water sent over the spllway (acft)
+
+season2 36.500
+
+
+----     93 VARIABLE TCOST.L               =    78046.667  total operating costs ($ continuous)
+
+
+EXECUTION TIME       =        5.891 SECONDS      4 MB  54.4.0 9a60ae27 WEX-WEI
+
+
+USER: Course License                                 G260818+0003Ac-GEN
+      Utah State University                                     DCE5615
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\hw5.gms
+Output     C:\Users\A02361084\OneDrive - USU\Desktop\classes\Fall 2026\Systems Analysis\GitHub_Repos\CEE_6410_Witte\hw\hw5.lst
